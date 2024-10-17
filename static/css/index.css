@@ -1,0 +1,215 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  padding: 20px;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+.video-container1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.video-item1 {
+  flex: 1;
+  max-width: 30%;
+  margin: 10px;
+  text-align: center;
+}
+
+.video-item1 video {
+  height: 200px; /* 固定高度 */
+  object-fit: cover; /* 保持视频的宽高比 */
+}
+
+.video-container2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.video-item2 {
+  flex: 1;
+  max-width: 20%;
+  margin: 10px;
+  text-align: center;
+}
+
+.video-item2 video {
+  height: 145px;
+  object-fit: cover; /* 保持视频的宽高比 */
+}
+
+@media screen and (max-width: 768px) {
+  .video-container1 {
+    flex-wrap: wrap;
+  }
+  .video-item1 {
+    max-width: 100%;
+  }
+  .video-item1 video {
+    height: auto; /* 在小屏幕上使用自动高度 */
+  }
+
+  .video-container2 {
+    flex-wrap: wrap;
+  }
+  .video-item2 {
+    max-width: 100%;
+  }
+  .video-item2 video {
+    height: auto; /* 在小屏幕上使用自动高度 */
+  }
+}
+
+.slider-pagination .slider-page {
+  background: #000000;
+}
+
+.eql-cntrb { 
+  font-size: smaller;
+}
+
+
+
+.pixart-alpha-icon::before {
+  background-image: url(../images/animate-x-logo.png);
+  background-size: 1em 1em;
+  display: inline-block;
+  width: 1em; 
+  height: 0.9em;
+  content:"";
+}
+
+section.banner {
+  background-image: url(../images/overlay.png), url(../images/head.png);
+  color: #aaaaaa;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: scroll;
+}

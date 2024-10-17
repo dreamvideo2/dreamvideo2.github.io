@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+<head>
+
+  <!-- <link href="css/two_style.css" rel="stylesheet" /> -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DreamVideo-2">
+  <meta property="og:title" content="DreamVideo-2" />
+  <meta property="og:description"
+    content="DreamVideo-2: Zero-Shot Subject-Driven Video Customization with Precise Motion Control" />
+  <meta property="og:url" content="URL OF THE WEBSITE" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/video_t1.png" />
+  <meta property="og:image:width" content="2412" />
+  <meta property="og:image:height" content="1394" />
+
+
+  <!-- <meta name="twitter:title" content="DreamVideo-2">
+  <meta name="twitter:description" content="DreamVideo-2: Zero-Shot Subject-Driven Video Customization with Precise Motion Control"> -->
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <!-- <meta name="twitter:image" content="static/images/video_t1.png">
+  <meta name="twitter:card" content="summary_large_image"> -->
+  <!-- Keywords for your paper to be indexed by-->
+  <!-- <meta name="keywords" content="Image-to-Video">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+
+  <title>DreamVideo-2</title>
+  <link rel="icon" type="image/x-icon" href="static/images/x_icon.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+
+<body>
+
+  <section class="hero banner" style="display: flex; align-items: center; justify-content: center; text-align: center;">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title" style="display: flex; align-items: center; justify-content: center; text-align: center;">
+                        <span>
+                            <span style="color: rgb(223,126,35); font-weight: bold; font-size: 52px;">DreamVideo-2:</span>
+                            <span style="color: white; font-weight: bold; font-size: 52px;">Zero-Shot</span><br>
+                            <span style="color: white; font-weight: bold; font-size: 52px;">Subject-Driven Video Customization</span><br>
+                            <span style="color: white; font-weight: bold; font-size: 52px;">with Precise Motion Control</span>
+                        </span>
+                    </h1>
+                    <div class="is-size-5 publication-authors" style="text-align: center;">
+                        <span class="author-block"></span>
+                        <a href="https://weilllllls.github.io" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Yujie Wei</a><sup>1</sup>,&thinsp;
+                        <span class="author-block">
+                            <a href="https://scholar.google.com.hk/citations?user=BwdpTiQAAAAJ" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Shiwei Zhang</a><sup>2* </sup>,&thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="https://jacobyuan7.github.io" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Hangjie Yuan</a><sup>2</sup>,&thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="https://scholar.google.com/citations?user=cQbXvkcAAAAJ" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Xiang Wang</a><sup>2</sup>, &thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="http://haonanqiu.com" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Haonan Qiu</a><sup>3</sup>,&thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="https://ruizhaocv.github.io" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Rui Zhao</a><sup>4</sup>,&thinsp;
+                        </span>
+                        <br>
+                        <span class="author-block">
+                            <a href="https://scholar.google.com/citations?hl=en&user=mZwJLeUAAAAJ" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Yutong Feng</a><sup>2</sup>,&thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="https://liewfeng.github.io" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Feng Liu</a><sup>2</sup>,&thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="https://hzzone.github.io" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Zhizhong Huang</a><sup>5</sup>&thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="https://jiaxin-ye.github.io" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Jiaxin Ye</a><sup>1</sup>&thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="https://scholar.google.com.sg/citations?user=16RDSEUAAAAJ" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Yingya Zhang</a><sup>2</sup>&thinsp;
+                        </span>
+                        <span class="author-block">
+                            <a href="http://hmshan.io" target="_blank" style="color: rgb(170,170,170) !important; text-decoration: underline;">Hongming Shan</a><sup>1†</sup>&thinsp;
+                        </span>
+                    </div>
+                    <div class="is-size-5 publication-authors" style="text-align: center;">
+                        <span class="author-block"><sup>1</sup>Fudan University&thinsp; &thinsp;</span>
+                        <span class="author-block"><sup>2</sup>Alibaba Group&thinsp; &thinsp;</span>
+                        <span class="author-block"><sup>3</sup>Nanyang Technological University&thinsp; &thinsp;</span>
+                        <br>
+                        <span class="author-block"><sup>4</sup>National University of Singapore&thinsp; &thinsp;</span>
+                        <span class="author-block"><sup>5</sup>Michigan State University&thinsp; &thinsp;</span>
+                        <span class="eql-cntrb"><small><br><sup>*</sup>Project Leader&thinsp; &thinsp;</small></span>
+                        <span class="eql-cntrb"><small><sup>†</sup>Corresponding Author</small></span>
+                    </div>
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <span class="link-block">
+                                <a href="#" target="_blank" class="external-link button is-normal is-rounded is-white">
+                                    <span class="icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </span>
+                                    <span>Paper</span>
+                                </a>
+                            </span>
+                            <span class="link-block">
+                                <a href="#" target="_blank" class="external-link button is-normal is-rounded is-white">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code (coming soon)</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+
+
+  <!-- Teaser video-->
+  <section class="hero teaser">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <!-- <div class="hero-body"> -->
+        <!-- <video poster="" id="tree" autoplay controls muted loop height="100%"> -->
+        <!-- Your video here -->
+        <!-- <source src="static/images/teaser.png"
+        type="video/mp4">
+      </video> -->
+      <br>
+        <img src="https://img.alicdn.com/imgextra/i2/O1CN01UGxlyI1fK67AohwM9_!!6000000003987-0-tps-2714-1416.jpg"
+          alt="MY ALT TEXT" />
+        </h2>
+      </div>
+      <!-- </div> -->
+    </div>
+  </section>
+  <!-- End teaser video -->
+
+  <!-- Teaser video-->
+  <section class="hero teaser">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <!-- <div class="hero-body"> -->
+        <video poster="" id="tree" controls muted loop height="100%">
+          <source src="https://cloud.video.taobao.com/vod/4exEMZiXnLqr1E7YCjo4UhPN3zllCesA4apV3uT6x20.mp4"
+            type="video/mp4">
+        </video>
+        </h2>
+      </div>
+    </div>
+  </section>
+  <!-- End teaser video -->
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="hero-body">
+      <div class="container is-max-desktop is-centered has-text-centered">
+        <!-- <div class="columns is-centered has-text-centered"> -->
+        <!-- <div class="column is-four-fifths"> -->
+        <h2 class="title is-3">Abstract</h2>
+        <!-- <h2 class="title is-3">Abstract</h2> -->
+        <div class="content has-text-justified">
+          <p>
+            Recent advances in customized video generation have enabled users to create videos tailored to both specific 
+            subjects and motion trajectories. However, existing methods often require complicated test-time fine-tuning 
+            and struggle with balancing subject learning and motion control, limiting their real-world applications. 
+            In this paper, we present \(\textbf{DreamVideo-2}\), a zero-shot video customization framework capable of generating videos 
+            with a specific subject and motion trajectory, guided by a single image and a bounding box sequence, 
+            respectively, and without the need for test-time fine-tuning. Specifically, we introduce reference attention, 
+            which leverages the model's inherent capabilities for subject learning, and devise a mask-guided motion module 
+            to achieve precise motion control by fully utilizing the robust motion signal of box masks derived from bounding 
+            boxes. While these two components achieve their intended functions, we empirically observe that motion control 
+            tends to dominate over subject learning. To address this, we propose two key designs: \(\textbf{1)}\) the masked reference 
+            attention, which integrates a blended latent mask modeling scheme into reference attention to enhance subject 
+            representations at the desired positions, and \(\textbf{2)}\) a reweighted diffusion loss, which differentiates the 
+            contributions of regions inside and outside the bounding boxes to ensure a balance between subject and 
+            motion control. Extensive experimental results on a newly curated dataset demonstrate that DreamVideo-2 
+            outperforms state-of-the-art methods in both subject customization and motion control. 
+            The dataset, code, and models will be made publicly available.
+          </p>
+        </div>
+        <!-- </div> -->
+        <!-- </div> -->
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+
+
+
+
+  <!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Demo Video</h2>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src=""
+            type="video/mp4">
+          </video> 
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+  <!-- End youtube video -->
+
+
+  <!-- Image carousel -->
+  <section class="hero is-small">
+    <!-- <section class="hero is-light"> -->
+    <div class="hero-body">
+      <div class="container is-max-desktop is-centered has-text-centered">
+        <h2 class="title is-3">Overall Framework of DreamVideo-2</h2>
+        <div class="item">
+          <!-- Your image here -->
+          <img src="https://img.alicdn.com/imgextra/i3/O1CN011rmDD71zUtlpteHvS_!!6000000006718-0-tps-2708-1480.jpg"
+            alt="MY ALT TEXT" />
+          <h2 class="content has-text-justified">
+            Overall framework of \(\textbf{DreamVideo-2}\). During training, a random video frame is segmented to obtain 
+            the subject image with a blank background.
+            The bounding boxes extracted from the training video are converted into binary box masks. 
+            Then, the subject image is treated as a single-frame video and processed in parallel with the video by 
+            masked reference attention that incorporates blended masks to learn the subject appearance.
+            Meanwhile, box masks are fed into a motion module that includes a spatiotemporal encoder and a ControlNet 
+            for motion control. 
+            Both the masked reference attention and motion module are trained using a reweighted diffusion loss.
+          </h2>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </section>
+  <!-- End image carousel -->
+
+  <!-- Video carousel -->
+  <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container is-centered has-text-centered">
+        <h2 class="title is-3">Joint Subject Customization and Motion Trajectory Control</h2>
+        <div id="results-carousel21" class="carousel results-carousel" data-bs-ride="carousel" data-interval="16000">
+          <div class="item item-video1">
+            <video poster="" id="video1" autoplay controls muted loop height="80%">
+              <source src="https://cloud.video.taobao.com/vod/w9k2Vy5O7g2xwo5WES1rPEjeDeXx4lSVaUTyoYFQbf4.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A corgi is surfing on a surfboard, <br> cherry blossoms sway in the breeze"</h5>
+          </div>
+          <div class="item item-video2">
+            <video poster="" id="video2" autoplay controls muted loop height="80%">
+              <source src="https://cloud.video.taobao.com/vod/NoxBpFB8BKNH5ZJ4KMLbxIU_aDLnn7N7U2ZzucT1VcM.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A red toy is dancing in the room"</h5>
+          </div>
+          <div class="item item-video3">
+            <video poster="" id="video3" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/qtxD_xIjPRRTZqlHbqlkGpSjLBZs9Bvmbgjrk7gN3Bk.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A cat is eating pizza"</h5>
+          </div>
+          <div class="item item-video4">
+            <video poster="" id="video4" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/seXX6ZHwZALUhp2d-XpPLit8CAGTIax4huMqX7vWuqw.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A plush toy sloth is walking on the beach"</h5>
+          </div>
+        </div>
+
+        <div id="results-carousel21" class="carousel results-carousel" data-bs-ride="carousel" data-interval="16000">
+          <div class="item item-video1">
+            <video poster="" id="video1" autoplay controls muted loop height="80%">
+              <source src="https://cloud.video.taobao.com/vod/b12jLFRBNfCYBJ1bXSQq07cg536ASKCAO_9UIYBfUYc.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A corgi is swimming"</h5>
+          </div>
+          <div class="item item-video2">
+            <video poster="" id="video2" autoplay controls muted loop height="80%">
+              <source src="https://cloud.video.taobao.com/vod/1vMtGkj18gI6tFtvn46Si9JWMhOnfIMFgdqD6GUqw-M.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A cat is walking under Eiffel Tower"</h5>
+          </div>
+          <div class="item item-video3">
+            <video poster="" id="video3" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/uhufcHaOK-Sle0lTot3wQCpj6Zfp_L5gShjwAjQ0T80.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A cartoon is walking on the snow"</h5>
+          </div>
+          <div class="item item-video4">
+            <video poster="" id="video4" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/WwgbRnqXQv90M1q3sdBzFxhkvtI9yB6U5xY6uecq6LU.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A fish is swimming underwater"</h5>
+          </div>
+          <div class="item item-video4">
+            <video poster="" id="video4" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/f8X8g_FuXcDMGzvPo-37E5S-bFgGkb2kuNX3BPBGeME.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A dog is running on the grass"</h5>
+          </div>
+          <div class="item item-video4">
+            <video poster="" id="video4" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/SvSTMortc6aEzONikU1vV1Gi4J0g0vxVrORf02kH8W8.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A cat is walking on Mars"</h5>
+          </div>
+          <div class="item item-video4">
+            <video poster="" id="video4" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/oWyQD-EwbqFleaXQSf4UIrjQvDz6ecdEhwQRAjSK-7E.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A fish is swimming underwater"</h5>
+          </div>
+          <div class="item item-video4">
+            <video poster="" id="video4" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/FYFtusK8IOnJYqb6xvwgiPTYSxF8yGek7KdrWj6Eaak.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A dog is running on the snow"</h5>
+          </div>
+          <div class="item item-video4">
+            <video poster="" id="video4" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/fCLYjHgZMUXlscF-55vZcKuV8vl5ytvXxXhDnBW02hg.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A car is moving on the road"</h5>
+          </div>
+          <div class="item item-video4">
+            <video poster="" id="video4" autoplay controls muted loop height="80%">\
+              <source src="https://cloud.video.taobao.com/vod/8ovM2Z7B5lDjmq49UV-WEErQL7IKIAmsRi_01bHotbE.mp4"
+                type="video/mp4">
+            </video>
+            <h5 class="title is-5">"A cat is skateboarding in the park"</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End video carousel -->
+
+  <!-- Video carousel -->
+  <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container is-centered has-text-centered">
+          <h2 class="title is-3">Qualitative Comparison of Joint Subject Customization and Motion Control</h2>
+          <div id="results-carousel11" class="carousel results-carousel" data-bs-ride="carousel" data-interval="16000">
+            <!-- Group 1 -->
+            <div class="item">
+              <h5 class="title is-5 has-text-centered">"A cat is skateboarding on the road"</h5>
+              <div class="video-container1">
+                <div class="video-item1">
+                  <video poster="" id="video2" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/XN1BInAkYOkLQb1dgNoF-GBqCTiF2X8ssgN6_Z_9BX0.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo</h5>
+                </div>
+                <div class="video-item1">
+                  <video poster="" id="video3" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/J_OmoCmfK_gTL84qAthi32u0g7N0oXeeCfxedIrDNcY.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">MotionBooth</h5>
+                </div>
+                <div class="video-item1">
+                  <video poster="" id="video1" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/1omr9U84bdZ_Y0iY-kM2qg1vwzCqkW7Ye2xCj-D4Piw.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo-2</h5>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 2 -->
+            <div class="item">
+              <h5 class="title is-5 has-text-centered">"A plush toy wolf is walking in the forest"</h5>
+              <div class="video-container1">
+                <div class="video-item1">
+                  <video poster="" id="video5" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/NBBjGQxQU9PcBYNFd1UepSJwuCWyuIqMWcZswNLtYBc.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo</h5>
+                </div>
+                <div class="video-item1">
+                  <video poster="" id="video6" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/KQkwh7MH1_Oto6zCKi5jthIc7hUlc7pd_5qciuHCCFg.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">MotionBooth</h5>
+                </div>
+                <div class="video-item1">
+                  <video poster="" id="video4" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/VBMQ2t4PiZrIzlN8RPiMjXMJn1UBvpTzpffPvpCEBf4.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo-2</h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End video carousel -->
+
+    <!-- Video carousel -->
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container is-centered has-text-centered">
+          <h2 class="title is-3">Qualitative Comparison of Subject Customization</h2>
+          <div id="results-carousel11" class="carousel results-carousel" data-bs-ride="carousel" data-interval="16000">
+            <!-- Group 1 -->
+            <div class="item">
+              <h5 class="title is-5 has-text-centered">"A duck toy is moving on the road"</h5>
+              <div class="video-container1">
+                <div class="video-item1">
+                  <video poster="" id="video2" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/wZIE9fjtFABBHaxtwx_CrivoMwbURUYEZmMR2WTbhU0.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">VideoBooth</h5>
+                </div>
+                <div class="video-item1">
+                  <video poster="" id="video3" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/znStsy3wCpefShZz1D4Fw2lKj8-8fA6rGji8I2ih6ME.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo</h5>
+                </div>
+                <div class="video-item1">
+                  <video poster="" id="video1" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/__ii6wydDD-k1AFhyL4_5aCogysCbQzk90xGJMf7hK0.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo-2</h5>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 2 -->
+            <div class="item">
+              <h5 class="title is-5 has-text-centered">"A fish is swimming"</h5>
+              <div class="video-container1">
+                <div class="video-item1">
+                  <video poster="" id="video5" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/VX6n60sSfNaPHmQDobu1ZTXO9_a0Q6TAT5mrMErfU2U.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">VideoBooth</h5>
+                </div>
+                <div class="video-item1">
+                  <video poster="" id="video6" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/IIHx9S-wVJHSauZOgsFWNx9hNLDoxEoLHjR9SuqgDms.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo</h5>
+                </div>
+                <div class="video-item1">
+                  <video poster="" id="video4" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/h6-_Rc1T9CDi4Hu75IaKn7ZDS_3SMB3H_DtRZ04oQxM.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo-2</h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End video carousel -->
+
+    <!-- Video carousel -->
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container is-centered has-text-centered">
+          <h2 class="title is-3">Qualitative Comparison of Motion Trajectory Control</h2>
+          <div id="results-carousel11" class="carousel results-carousel" data-bs-ride="carousel" data-interval="16000">
+            <!-- Group 1 -->
+            <div class="item">
+              <h5 class="title is-5 has-text-centered">"A dog is walking among the flowers"</h5>
+              <div class="video-container2">
+                <div class="video-item2">
+                  <video poster="" id="video2" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/ooIlCNazPlx1qaswjrhmAZcYItDCJ_6mLLkIQpRh2kk.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">MotionCtrl</h5>
+                </div>
+                <div class="video-item2">
+                  <video poster="" id="video3" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/aGiq39loBOM1l_KDlWWBUPWBY8ChjM7Fiv1g1qQA6qI.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">Peekaboo</h5>
+                </div>
+                <div class="video-item2">
+                  <video poster="" id="video3" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/FdwJSqdsTz14s5JwDz6t51Rkz8a8hOjkHGAnt_2K_bg.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">Direct-a-Video</h5>
+                </div>
+                <div class="video-item2">
+                  <video poster="" id="video1" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/ZBi1cmzmJhrXhChhnb3qDYAT68XCTiRwFl6jIDUwKm0.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo-2</h5>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 2 -->
+            <div class="item">
+              <h5 class="title is-5 has-text-centered">"A cat is surfing on a surfboard"</h5>
+              <div class="video-container2">
+                <div class="video-item2">
+                  <video poster="" id="video2" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/TyysUbEVGJhe7CrmzkSzmpN34HMT2ItE8qvm7UN-OTo.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">MotionCtrl</h5>
+                </div>
+                <div class="video-item2">
+                  <video poster="" id="video3" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/yaJIKWYjwcEZeA0qXjeijPmGV_P_UCTu9FsGl6yc8Ls.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">Peekaboo</h5>
+                </div>
+                <div class="video-item2">
+                  <video poster="" id="video3" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/T1SQRBWWLE0AkDlmQTdTlRwgjXNQA5Rv4s8z2SkMH_M.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">Direct-a-Video</h5>
+                </div>
+                <div class="video-item2">
+                  <video poster="" id="video1" autoplay controls muted loop>
+                    <source src="https://cloud.video.taobao.com/vod/iu5bleHbTiSP3wl1hF0r0GrwGt9Uxkm-MRON-1TxW3A.mp4" type="video/mp4">
+                  </video>
+                  <h5 class="title is-4">DreamVideo-2</h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End video carousel -->
+
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">Reference</h2>
+      <pre>
+      <code>
+@article{wei2024DreamVideo2,
+  title={DreamVideo-2: Zero-Shot Subject-Driven Video Customization with Precise Motion Control},
+  author={},
+  journal={arXiv preprint arXiv:},
+  year={2024}
+}
+</code>
+</pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8 text-center">
+          <div class="content text-center">
+
+            <p>
+              <!-- <font color='red'>
+                The images used in the demo videos are for academic purposes only and are not for commercial use. If you
+                feel that the images we use infringe your rights, please contact us and we will delete them immediately
+                and express our sincere apologies. Contact email: .</font> -->
+              The source code of this webpage is borrowed from the <a href="https://nerfies.github.io"
+                target="_blank">Nerfies</a>  project webpage.
+            </p>
+            <p class="has-text-centered">Total clicks: <span id="busuanzi_value_site_pv"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    bulmaCarousel.attach('#results-carousel21', {
+      slidesToScroll: 1,
+      slidesToShow: 2,
+      infinite: true,
+      autoplay: true,
+      PauseOnHover: true,
+    });
+    bulmaCarousel.attach('#results-carousel11', {
+      slidesToScroll: 1,
+      slidesToShow: 1,
+      infinite: true,
+      autoplay: true,
+      pagination: true,
+      PauseOnHover: true,
+    });
+    bulmaCarousel.attach('#results-carousel33', {
+      slidesToScroll: 1,
+      slidesToShow: 2,
+      infinite: true,
+      autoplay: false,
+    });
+  </script>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
