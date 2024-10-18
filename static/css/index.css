@@ -125,12 +125,26 @@ body {
   margin: 0;
 }
 
-.video-container1 {
+.text-container {
+  margin: 20px 0;
+}
+
+.video-container1,
+.video-container2 {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
   flex-wrap: nowrap;
   gap: 10px;
+}
+
+.video-container1-firstrow,
+.video-container2-firstrow {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 5px;
 }
 
 .video-item1 {
@@ -140,17 +154,10 @@ body {
   text-align: center;
 }
 
-.video-item1 video {
-  height: 200px; /* 固定高度 */
-  object-fit: cover; /* 保持视频的宽高比 */
-}
-
-.video-container2 {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-  gap: 10px;
+.video-item1 video,
+.video-item1 img {
+  height: 200px;
+  object-fit: cover;
 }
 
 .video-item2 {
@@ -160,9 +167,10 @@ body {
   text-align: center;
 }
 
-.video-item2 video {
+.video-item2 video,
+.video-item2 img {
   height: 145px;
-  object-fit: cover; /* 保持视频的宽高比 */
+  object-fit: cover;
 }
 
 @media screen and (max-width: 768px) {
@@ -173,7 +181,7 @@ body {
     max-width: 100%;
   }
   .video-item1 video {
-    height: auto; /* 在小屏幕上使用自动高度 */
+    height: auto;
   }
 
   .video-container2 {
@@ -183,7 +191,7 @@ body {
     max-width: 100%;
   }
   .video-item2 video {
-    height: auto; /* 在小屏幕上使用自动高度 */
+    height: auto;
   }
 }
 
