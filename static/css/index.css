@@ -204,14 +204,18 @@ body {
 }
 
 
-
-.pixart-alpha-icon::before {
-  background-image: url(../images/animate-x-logo.png);
-  background-size: 1em 1em;
+.pixart-alpha-icon {
+  font-size: 1450%;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  background-image: url(../images/dreamvideo2-logo.png);
+  background-size: contain;
   display: inline-block;
-  width: 1em; 
-  height: 0.9em;
-  content:"";
+  width: 1em;
+  height: 1em;
+  content: "";
+  vertical-align: top; /* 调整垂直对齐方式 */
 }
 
 section.banner {
