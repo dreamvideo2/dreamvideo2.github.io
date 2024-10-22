@@ -156,7 +156,7 @@ body {
 
 .video-item1 video,
 .video-item1 img {
-  height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
@@ -169,7 +169,7 @@ body {
 
 .video-item2 video,
 .video-item2 img {
-  height: 145px;
+  height: 125px;
   object-fit: cover;
 }
 
